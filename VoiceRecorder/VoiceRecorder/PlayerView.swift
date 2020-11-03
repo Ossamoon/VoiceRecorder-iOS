@@ -9,23 +9,44 @@ import SwiftUI
 
 struct PlayerView: View {
     
-    @ObservedObject var audioRecorder: AudioRecorder
-    var number: String
+    @ObservedObject var audioPlayer = AudioPlayer()
+    
+    var audioURL: URL
     
     var body: some View {
         VStack {
-            Text("再生画面" + number)
+            if audioPlayer.isPlaying == false {
+                Button(action: {
+                    self.audioPlayer.startPlayback(audio: self.audioURL)
+                }) {
+                    Image(systemName: "play.circle")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 100, height: 100)
+                        .padding()
+                }
+            } else {
+                Button(action: {
+                    self.audioPlayer.stopPlayback()
+                }) {
+                    Image(systemName: "stop.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 100, height: 100)
+                        .padding()
+                }
+            }
+            Text("\(audioURL.lastPathComponent)" + "を再生")
                 .font(.title)
-            Text("切替で表示する画面")
-                .padding()
         }
-        .navigationBarTitle("再生画面", displayMode: .inline)
+        .navigationBarTitle(Text("\(audioURL.lastPathComponent)"), displayMode: .inline)
     }
 }
 
+/*
 struct PlayerView_Previews: PreviewProvider {
     static var previews: some View {
-        PlayerView(audioRecorder: AudioRecorder(), number: "_test")
+        PlayerView()
     }
 }
-
+*/

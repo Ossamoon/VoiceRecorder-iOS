@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct RecordingRow: View {
+    
     var audioURL: URL
         
     var body: some View {

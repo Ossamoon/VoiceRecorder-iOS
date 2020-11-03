@@ -18,7 +18,7 @@ struct ContentView: View {
                 List {
                     ForEach(audioRecorder.recordings, id: \.createdAt) {
                         recording in
-                        NavigationLink(destination: PlayerView(audioRecorder: self.audioRecorder, number: "(仮)") ) {
+                        NavigationLink(destination: PlayerView(audioURL: recording.fileURL)) {
                             RecordingRow(audioURL: recording.fileURL)
                         }
                     }
