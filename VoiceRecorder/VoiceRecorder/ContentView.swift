@@ -8,16 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
+    
     @State var showRecorderView: Bool = false
+    @ObservedObject var audioRecorder: AudioRecorder
+    
     var body: some View {
         VStack {
             NavigationView {
                 List {
-                    NavigationLink(destination: PlayerView(number: "1") ) {
-                        Text("個々の録音データ1")
-                    }
-                    NavigationLink(destination: PlayerView(number: "2") ) {
-                        Text("個々の録音データ2")
+                    ForEach(audioRecorder.recordings, id: \.createdAt) {
+                        recording in
+                        NavigationLink(destination: PlayerView(audioRecorder: self.audioRecorder, number: "(仮)") ) {
+                            RecordingRow(audioURL: recording.fileURL)
+                        }
                     }
                 }
                 .navigationTitle("録音データリスト")
@@ -29,7 +32,7 @@ struct ContentView: View {
                 Text("録音！！")
             }
             .sheet(isPresented: self.$showRecorderView) {
-                RecorderView()
+                RecorderView(audioRecorder: self.audioRecorder)
             }
         }
     }
@@ -37,6 +40,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(audioRecorder: AudioRecorder())
     }
 }
