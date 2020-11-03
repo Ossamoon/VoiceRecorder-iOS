@@ -22,8 +22,10 @@ struct ContentView: View {
                             RecordingRow(audioURL: recording.fileURL)
                         }
                     }
+                    .onDelete(perform: delete)
                 }
                 .navigationTitle("録音データリスト")
+                .navigationBarItems(trailing: EditButton())
             }
             
             Button(action: {
@@ -35,6 +37,15 @@ struct ContentView: View {
                 RecorderView(audioRecorder: self.audioRecorder)
             }
         }
+    }
+    
+    func delete(at offsets: IndexSet) {
+            
+        var urlsToDelete = [URL]()
+        for index in offsets {
+            urlsToDelete.append(audioRecorder.recordings[index].fileURL)
+        }
+        audioRecorder.deleteRecording(urlsToDelete: urlsToDelete)
     }
 }
 
