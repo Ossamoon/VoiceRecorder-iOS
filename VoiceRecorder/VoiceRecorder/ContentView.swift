@@ -31,7 +31,12 @@ struct ContentView: View {
             Button(action: {
                 self.showRecorderView = true
             }) {
-                Text("録音！！")
+                Text("　録音　")
+                    .font(.title)
+                    .padding()
+                    .foregroundColor(Color.gray)
+                    .background(Color(.green))
+                    .cornerRadius(10)
             }
             .sheet(isPresented: self.$showRecorderView) {
                 RecorderView(audioRecorder: self.audioRecorder)
@@ -39,7 +44,7 @@ struct ContentView: View {
         }
     }
     
-    func delete(at offsets: IndexSet) {
+    private func delete(at offsets: IndexSet) {
             
         var urlsToDelete = [URL]()
         for index in offsets {

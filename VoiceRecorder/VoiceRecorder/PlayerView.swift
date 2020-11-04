@@ -38,6 +38,7 @@ struct PlayerView: View {
             }
             Text("\(audioURL.lastPathComponent)" + "を再生")
                 .font(.title)
+                .padding()
         }
         .navigationBarTitle(Text("\(audioURL.lastPathComponent)"), displayMode: .inline)
     }
