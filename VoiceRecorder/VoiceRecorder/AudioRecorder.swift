@@ -14,15 +14,25 @@ class AudioRecorder: NSObject, ObservableObject {
     
     let objectWillChange = PassthroughSubject<AudioRecorder, Never>()
     
-    var audioRecorder: AVAudioRecorder!
+    private var audioRecorder: AVAudioRecorder!
     
-    var recordings = [Recording]()
+    private(set) var recordings = [Recording]()
     
-    var recording = false {
+    private(set) var recording = false {
         didSet {
             objectWillChange.send(self)
         }
     }
+    
+    private var timer : Timer!
+    
+    private(set) var currentTime : Double = 0.00 {
+        didSet {
+            objectWillChange.send(self)
+        }
+    }
+    private(set) var averagePower : Float = 0.00
+    
     
     override init() {
         super.init()
@@ -51,8 +61,17 @@ class AudioRecorder: NSObject, ObservableObject {
         
         do {
             audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
+            audioRecorder.isMeteringEnabled = true
             audioRecorder.record()
             recording = true
+            
+            self.timer?.invalidate()
+            self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) {
+                 _ in
+                self.audioRecorder.updateMeters()
+                self.averagePower = self.audioRecorder.averagePower(forChannel: 0)
+                self.currentTime = self.audioRecorder.currentTime
+            }
         } catch {
             print("Could not start recording")
         }
@@ -61,6 +80,7 @@ class AudioRecorder: NSObject, ObservableObject {
     func stopRecording() {
         audioRecorder.stop()
         recording = false
+        self.timer.invalidate()
         
         fetchRecordings()
     }

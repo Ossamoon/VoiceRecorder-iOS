@@ -11,7 +11,7 @@ struct RecorderView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-    @ObservedObject var audioRecorder: AudioRecorder
+    @ObservedObject var audioRecorder = AudioRecorder()
     
     var body: some View {
         VStack {
@@ -31,6 +31,8 @@ struct RecorderView: View {
             } else {
                 Text("終了")
                     .font(/*@START_MENU_TOKEN@*/.largeTitle/*@END_MENU_TOKEN@*/)
+                Text(String(self.audioRecorder.currentTime))
+                Text(String(self.audioRecorder.averagePower))
                 Button(action: {
                     self.audioRecorder.stopRecording()
                     self.presentationMode.wrappedValue.dismiss()
