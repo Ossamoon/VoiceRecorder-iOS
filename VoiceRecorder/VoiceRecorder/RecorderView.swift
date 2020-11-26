@@ -29,6 +29,16 @@ struct RecorderView: View {
                         .padding()
                 }
             } else {
+                HStack {
+                    /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Content@*/Text("Content")/*@END_MENU_TOKEN@*/
+                }
+                Image(systemName: "rectangle.portrait.fill")
+                    .resizable()
+                    .frame(
+                        width: 10,
+                        height: CGFloat(self.audioRecorder.averagePower + 160.0)
+                    )
+                    .foregroundColor(.green)
                 Text("終了")
                     .font(/*@START_MENU_TOKEN@*/.largeTitle/*@END_MENU_TOKEN@*/)
                 Text(String(self.audioRecorder.currentTime))

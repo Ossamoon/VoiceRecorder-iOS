@@ -69,6 +69,7 @@ class AudioRecorder: NSObject, ObservableObject {
             self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) {
                  _ in
                 self.audioRecorder.updateMeters()
+                
                 self.averagePower = self.audioRecorder.averagePower(forChannel: 0)
                 self.currentTime = self.audioRecorder.currentTime
             }
