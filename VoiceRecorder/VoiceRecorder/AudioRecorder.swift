@@ -26,15 +26,20 @@ class AudioRecorder: NSObject, ObservableObject {
     
     private var timer : Timer!
     
-    private(set) var currentTime : Double = 0.00 {
+    let timeInterval = 0.05
+    let numberOfSamples = 60
+    
+    private(set) var currentTime : Double {
         didSet {
             objectWillChange.send(self)
         }
     }
-    private(set) var averagePower : Float = 0.00
+    private(set) var averagePowerList : [Float]
     
     
     override init() {
+        self.currentTime = 0.00
+        self.averagePowerList = [Float](repeating: -160.0, count: numberOfSamples)
         super.init()
         fetchRecordings()
     }
@@ -54,7 +59,7 @@ class AudioRecorder: NSObject, ObservableObject {
         
         let settings = [
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-            AVSampleRateKey: 12000,
+            AVSampleRateKey: 44100,
             AVNumberOfChannelsKey: 1,
             AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
         ]
@@ -66,11 +71,11 @@ class AudioRecorder: NSObject, ObservableObject {
             recording = true
             
             self.timer?.invalidate()
-            self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) {
+            self.timer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: true) {
                  _ in
                 self.audioRecorder.updateMeters()
-                
-                self.averagePower = self.audioRecorder.averagePower(forChannel: 0)
+                let temp = self.averagePowerList.dropFirst(1)
+                self.averagePowerList = temp + [self.audioRecorder.averagePower(forChannel: 0)]
                 self.currentTime = self.audioRecorder.currentTime
             }
         } catch {
@@ -81,7 +86,7 @@ class AudioRecorder: NSObject, ObservableObject {
     func stopRecording() {
         audioRecorder.stop()
         recording = false
-        self.timer.invalidate()
+        self.timer?.invalidate()
         
         fetchRecordings()
     }

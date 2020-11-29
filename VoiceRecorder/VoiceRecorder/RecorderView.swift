@@ -10,8 +10,13 @@ import SwiftUI
 struct RecorderView: View {
     
     @Environment(\.presentationMode) var presentationMode
-    
     @ObservedObject var audioRecorder = AudioRecorder()
+    private let padding: CGFloat = 1.5
+    
+    private func normalizeSoundLevel(level: Float) -> CGFloat {
+        let level = max(0.02, CGFloat(level) + 40) // between 0.02 and 40
+        return CGFloat(level * (260 / 40)) // scaled to max at 260 (our height of our bar)
+    }
     
     var body: some View {
         VStack {
@@ -29,20 +34,18 @@ struct RecorderView: View {
                         .padding()
                 }
             } else {
-                HStack {
-                    /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Content@*/Text("Content")/*@END_MENU_TOKEN@*/
+                HStack(spacing: 1.5){
+                    ForEach(audioRecorder.averagePowerList, id: \.self) {
+                        level in
+                        PowerBar(numberOfSamples: audioRecorder.numberOfSamples,
+                                 value: self.normalizeSoundLevel(level: level),
+                                 padding: self.padding
+                        )
+                    }
                 }
-                Image(systemName: "rectangle.portrait.fill")
-                    .resizable()
-                    .frame(
-                        width: 10,
-                        height: CGFloat(self.audioRecorder.averagePower + 160.0)
-                    )
-                    .foregroundColor(.green)
+                Text(String(format: "current time: %.2f", self.audioRecorder.currentTime))
                 Text("終了")
-                    .font(/*@START_MENU_TOKEN@*/.largeTitle/*@END_MENU_TOKEN@*/)
-                Text(String(self.audioRecorder.currentTime))
-                Text(String(self.audioRecorder.averagePower))
+                    .font(.largeTitle)
                 Button(action: {
                     self.audioRecorder.stopRecording()
                     self.presentationMode.wrappedValue.dismiss()
