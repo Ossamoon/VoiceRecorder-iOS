@@ -15,17 +15,21 @@ struct RenamingRow: View {
     @State private var isEditing = false
     
     var body: some View {
-        TextField(
-                "filename",
-                 text: $filename
-            ) { isEditing in
-                self.isEditing = isEditing
-            } onCommit: {
-                audioRecorder.updateRecordingName(from: audioURL, to: URL(string: filename.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!, relativeTo: audioURL)!)
-            }
-            .autocapitalization(.none)
-            .disableAutocorrection(true)
-            .border(Color(UIColor.separator))
+        HStack{
+            TextField(
+                    "filename",
+                     text: $filename
+                ) { isEditing in
+                    self.isEditing = isEditing
+                } onCommit: {
+                    let str = filename + ".m4a"
+                    audioRecorder.updateRecordingName(from: audioURL, to: URL(string: str.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!, relativeTo: audioURL)!)
+                }
+                .autocapitalization(.none)
+                .disableAutocorrection(true)
+                .border(Color(UIColor.separator))
+            Text(".m4a")
+        }
     }
 }
 /*

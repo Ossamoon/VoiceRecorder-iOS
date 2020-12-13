@@ -21,7 +21,9 @@ struct ContentView: View {
                         recording in
                         NavigationLink(destination: PlayerView(audioURL: recording.fileURL)) {
                             if recording.fileURL.lastPathComponent == self.editingFile {
-                                RenamingRow(audioRecorder: self.audioRecorder, audioURL: recording.fileURL, filename: recording.fileURL.lastPathComponent)
+                                let temp = recording.fileURL.lastPathComponent
+                                let temp2 = substr(temp, 0, temp.count - 5)
+                                RenamingRow(audioRecorder: self.audioRecorder, audioURL: recording.fileURL, filename: temp2)
                             }
                             else {
                                 RecordingRow(audioURL: recording.fileURL)
@@ -63,8 +65,13 @@ struct ContentView: View {
         }
     }
     
+    let substr : (String, Int, Int) -> String = { text, from, length in
+        let to = text.index(text.startIndex, offsetBy:from + length)
+        let from = text.index(text.startIndex, offsetBy:from)
+        return String(text[from...to])
+    }
+    
     private func delete(at offsets: IndexSet) {
-            
         var urlsToDelete = [URL]()
         for index in offsets {
             urlsToDelete.append(audioRecorder.recordings[index].fileURL)
