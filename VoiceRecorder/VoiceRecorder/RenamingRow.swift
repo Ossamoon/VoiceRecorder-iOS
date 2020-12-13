@@ -21,7 +21,7 @@ struct RenamingRow: View {
             ) { isEditing in
                 self.isEditing = isEditing
             } onCommit: {
-                audioRecorder.updateRecordingName(from: audioURL, to: URL(string: filename, relativeTo: audioURL)!)
+                audioRecorder.updateRecordingName(from: audioURL, to: URL(string: filename.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!, relativeTo: audioURL)!)
             }
             .autocapitalization(.none)
             .disableAutocorrection(true)
