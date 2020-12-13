@@ -22,11 +22,8 @@
 
 ### スクリーンショット
 
-#### リスト表示画面
+リスト表示画面 | 録音画面 | 再生画面
+---|---|---
 <img src="https://user-images.githubusercontent.com/73047429/102016602-081dc900-3da5-11eb-92fb-938c6c49cef5.PNG" width="207" height="448" alt="画像1">
-
-#### 録音画面
-<img src="https://user-images.githubusercontent.com/73047429/102016534-d278e000-3da4-11eb-88c5-20e1d79119b8.PNG" width="207" height="448" alt="画像2">
-
-#### 再生画面
-<img src="https://user-images.githubusercontent.com/73047429/102016613-25529780-3da5-11eb-8eee-135d954e8778.PNG" width="207" height="448" alt="画像3">
+| <img src="https://user-images.githubusercontent.com/73047429/102016534-d278e000-3da4-11eb-88c5-20e1d79119b8.PNG" width="207" height="448" alt="画像2">
+| <img src="https://user-images.githubusercontent.com/73047429/102016613-25529780-3da5-11eb-8eee-135d954e8778.PNG" width="207" height="448" alt="画像3">
