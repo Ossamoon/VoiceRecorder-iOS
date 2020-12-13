@@ -7,15 +7,15 @@
 - 録音中の経過時間を表示
 - 録音中の音声をリアルタイムで波形表示
 
-![IMG_1425](https://user-images.githubusercontent.com/73047429/102016534-d278e000-3da4-11eb-88c5-20e1d79119b8.PNG)
+<img src="https://user-images.githubusercontent.com/73047429/102016534-d278e000-3da4-11eb-88c5-20e1d79119b8.PNG" width="207" height="448" alt="画像1">
 
 - 録音したオーディオデータをリスト表示
 
-![IMG_1431](https://user-images.githubusercontent.com/73047429/102016602-081dc900-3da5-11eb-92fb-938c6c49cef5.PNG)
+<img src="https://user-images.githubusercontent.com/73047429/102016602-081dc900-3da5-11eb-92fb-938c6c49cef5.PNG" width="207" height="448" alt="画像2">
 
 - 音声の再生
 
-![IMG_1430](https://user-images.githubusercontent.com/73047429/102016613-25529780-3da5-11eb-8eee-135d954e8778.PNG)
+<img src="https://user-images.githubusercontent.com/73047429/102016613-25529780-3da5-11eb-8eee-135d954e8778.PNG" width="207" height="448" alt="画像3">¥
 
 - 録音したオーディオデータのファイル名変更
 - 録音したオーディオデータの削除
