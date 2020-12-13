@@ -20,6 +20,7 @@
 		B1572ABA25503F1E00E6A3DC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1572AB925503F1E00E6A3DC /* Preview Assets.xcassets */; };
 		B1572AC7255043EA00E6A3DC /* RecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1572AC6255043EA00E6A3DC /* RecorderView.swift */; };
 		B1572ACA2550447800E6A3DC /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1572AC92550447800E6A3DC /* PlayerView.swift */; };
+		B1C146EE2586151B0097D71E /* RenamingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C146ED2586151B0097D71E /* RenamingRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		B1572ABB25503F1E00E6A3DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B1572AC6255043EA00E6A3DC /* RecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderView.swift; sourceTree = "<group>"; };
 		B1572AC92550447800E6A3DC /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		B1C146ED2586151B0097D71E /* RenamingRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenamingRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 			children = (
 				B1572AB225503F1B00E6A3DC /* VoiceRecorderApp.swift */,
 				B1572AB425503F1B00E6A3DC /* ContentView.swift */,
+				B1C146ED2586151B0097D71E /* RenamingRow.swift */,
 				B1572AC6255043EA00E6A3DC /* RecorderView.swift */,
 				B1572AC92550447800E6A3DC /* PlayerView.swift */,
 				B13D908E2550F44900138DA7 /* RecordingRow.swift */,
@@ -172,6 +175,7 @@
 				B1572AB525503F1B00E6A3DC /* ContentView.swift in Sources */,
 				B1572AB325503F1B00E6A3DC /* VoiceRecorderApp.swift in Sources */,
 				B1572ACA2550447800E6A3DC /* PlayerView.swift in Sources */,
+				B1C146EE2586151B0097D71E /* RenamingRow.swift in Sources */,
 				B12A07BB2551448200F202EB /* AudioPlayer.swift in Sources */,
 				B15315362573475F009A7733 /* PowerBar.swift in Sources */,
 				B13D907C2550E8B400138DA7 /* AudioRecorder.swift in Sources */,

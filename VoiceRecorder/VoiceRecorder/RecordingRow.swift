@@ -13,6 +13,7 @@ struct RecordingRow: View {
         
     var body: some View {
         HStack {
+            //Text("\(audioURL.absoluteString)")
             Text("\(audioURL.lastPathComponent)")
             Spacer()
         }

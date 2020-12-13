@@ -67,10 +67,14 @@ class AudioRecorder: NSObject, ObservableObject {
         do {
             audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
             audioRecorder.isMeteringEnabled = true
+            
+            self.timer?.invalidate()
+            self.currentTime = 0.00
+            self.averagePowerList = [Float](repeating: -160.0, count: numberOfSamples)
+            
             audioRecorder.record()
             recording = true
             
-            self.timer?.invalidate()
             self.timer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: true) {
                  _ in
                 self.audioRecorder.updateMeters()
@@ -117,6 +121,16 @@ class AudioRecorder: NSObject, ObservableObject {
             }
         }
             
+        fetchRecordings()
+    }
+    
+    func updateRecordingName(from urlsToMoveFrom: URL, to urlsToMoveTo: URL) {
+        do {
+            try FileManager.default.moveItem(at: urlsToMoveFrom, to: urlsToMoveTo)
+        } catch {
+            print("File could not be Renamed!")
+        }
+        
         fetchRecordings()
     }
 }

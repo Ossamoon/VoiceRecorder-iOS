@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     
     @State var showRecorderView: Bool = false
+    @State var editingFile: String? = nil
     @ObservedObject var audioRecorder: AudioRecorder
     
     var body: some View {
@@ -19,13 +20,31 @@ struct ContentView: View {
                     ForEach(audioRecorder.recordings, id: \.createdAt) {
                         recording in
                         NavigationLink(destination: PlayerView(audioURL: recording.fileURL)) {
-                            RecordingRow(audioURL: recording.fileURL)
+                            if recording.fileURL.lastPathComponent == self.editingFile {
+                                RenamingRow(audioRecorder: self.audioRecorder, audioURL: recording.fileURL, filename: recording.fileURL.lastPathComponent)
+                            }
+                            else {
+                                RecordingRow(audioURL: recording.fileURL)
+                            }
                         }
+                        .contextMenu(ContextMenu(menuItems: {
+                            Text(recording.fileURL.lastPathComponent)
+                            Button(action: {
+                                self.editingFile = recording.fileURL.lastPathComponent
+                            }) {
+                                Text("Rename")
+                            }
+                            Button(action: {
+                                audioRecorder.deleteRecording(urlsToDelete: [recording.fileURL])
+                            }) {
+                                Text("Delete")
+                            }
+                        }))
                     }
                     .onDelete(perform: delete)
                 }
                 .navigationTitle("録音データリスト")
-                .navigationBarItems(trailing: EditButton())
+                //.navigationBarItems(trailing: EditButton())
             }
             
             Button(action: {
